@@ -1,0 +1,27 @@
+--cpu Cortex-M3
+"b-boot-f1\startup_stm32f103xe.o"
+"b-boot-f1\bootloader.o"
+"b-boot-f1\main.o"
+"b-boot-f1\gpio.o"
+"b-boot-f1\usart.o"
+"b-boot-f1\stm32f1xx_it.o"
+"b-boot-f1\stm32f1xx_hal_msp.o"
+"b-boot-f1\stm32f1xx_hal_gpio_ex.o"
+"b-boot-f1\stm32f1xx_hal_tim.o"
+"b-boot-f1\stm32f1xx_hal_tim_ex.o"
+"b-boot-f1\stm32f1xx_hal_uart.o"
+"b-boot-f1\stm32f1xx_hal.o"
+"b-boot-f1\stm32f1xx_hal_rcc.o"
+"b-boot-f1\stm32f1xx_hal_rcc_ex.o"
+"b-boot-f1\stm32f1xx_hal_gpio.o"
+"b-boot-f1\stm32f1xx_hal_dma.o"
+"b-boot-f1\stm32f1xx_hal_cortex.o"
+"b-boot-f1\stm32f1xx_hal_pwr.o"
+"b-boot-f1\stm32f1xx_hal_flash.o"
+"b-boot-f1\stm32f1xx_hal_flash_ex.o"
+"b-boot-f1\stm32f1xx_hal_exti.o"
+"b-boot-f1\system_stm32f1xx.o"
+--library_type=microlib --strict --scatter "B-Boot-F1\B-Boot-F1.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "B-Boot-F1.map" -o B-Boot-F1\B-Boot-F1.axf
