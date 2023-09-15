@@ -1,16 +1,16 @@
 {
     "configurations": [
         {
-            "name": "B-Boot-F1",
+            "name": "B-Boot-F1-APP",
             "includePath": [
-                "e:\\Desktop\\STM32-Bootloader\\B-Boot-F1\\Core\\Inc",
-                "e:\\Desktop\\STM32-Bootloader\\B-Boot-F1\\Drivers\\STM32F1xx_HAL_Driver\\Inc",
-                "e:\\Desktop\\STM32-Bootloader\\B-Boot-F1\\Drivers\\STM32F1xx_HAL_Driver\\Inc\\Legacy",
-                "e:\\Desktop\\STM32-Bootloader\\B-Boot-F1\\Drivers\\CMSIS\\Device\\ST\\STM32F1xx\\Include",
-                "e:\\Desktop\\STM32-Bootloader\\B-Boot-F1\\Drivers\\CMSIS\\Include",
-                "e:\\Desktop\\STM32-Bootloader\\B-Boot-F1\\MDK-ARM",
-                "e:\\Desktop\\STM32-Bootloader\\B-Boot-F1\\Core\\Src",
-                "e:\\Desktop\\STM32-Bootloader\\B-Boot-F1\\Drivers\\STM32F1xx_HAL_Driver\\Src"
+                "e:\\Desktop\\STM32-Bootloader\\B-Boot-F1-APP\\Core\\Inc",
+                "e:\\Desktop\\STM32-Bootloader\\B-Boot-F1-APP\\Drivers\\STM32F1xx_HAL_Driver\\Inc",
+                "e:\\Desktop\\STM32-Bootloader\\B-Boot-F1-APP\\Drivers\\STM32F1xx_HAL_Driver\\Inc\\Legacy",
+                "e:\\Desktop\\STM32-Bootloader\\B-Boot-F1-APP\\Drivers\\CMSIS\\Device\\ST\\STM32F1xx\\Include",
+                "e:\\Desktop\\STM32-Bootloader\\B-Boot-F1-APP\\Drivers\\CMSIS\\Include",
+                "e:\\Desktop\\STM32-Bootloader\\B-Boot-F1-APP\\MDK-ARM",
+                "e:\\Desktop\\STM32-Bootloader\\B-Boot-F1-APP\\Core\\Src",
+                "e:\\Desktop\\STM32-Bootloader\\B-Boot-F1-APP\\Drivers\\STM32F1xx_HAL_Driver\\Src"
             ],
             "defines": [
                 "USE_HAL_DRIVER",

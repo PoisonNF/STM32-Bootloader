@@ -29,3 +29,4 @@ b-boot-f1-app\ymodem.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h
 b-boot-f1-app\ymodem.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h
 b-boot-f1-app\ymodem.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 b-boot-f1-app\ymodem.o: ../Core/Inc/usart.h
+b-boot-f1-app\ymodem.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h

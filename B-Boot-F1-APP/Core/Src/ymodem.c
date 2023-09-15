@@ -2,13 +2,26 @@
 #include "main.h"
 #include "stdio.h"
 #include "usart.h"
+#include "string.h"
+
+/**
+ * @brief 串口重定向（需要开启Use MicroLIB）
+ * @param ch  		发送的数据
+ * @param f         文件流
+ * @return ch
+ */
+int fputc(int ch, FILE *f)
+{
+	HAL_UART_Transmit(&huart1, (uint8_t *)&ch, 1, 0xFFFF);
+	return ch;
+}
 
 /**
  * @brief 发送指令
  * @param command  指令内容	
  * @return NULL
  */
-void send_command(uint8_t command)
+void Send_Command(uint8_t command)
 {
 	HAL_UART_Transmit(&huart2, (uint8_t *)&command,1, 0xFFFF);
 	HAL_Delay(10);
@@ -81,7 +94,7 @@ uint8_t save_buf[128] = {0};
  * @brief CRC-16 校验
  * @param addr 开始地址
  * @param num   长度
- * @param num   CRC
+ * @param crc   CRC
  * @return crc  返回CRC的值
  */
 uint16_t crc16(uint8_t *addr, int num, uint16_t crc)  
@@ -110,21 +123,18 @@ uint16_t crc16(uint8_t *addr, int num, uint16_t crc)
  */
 uint8_t Check_CRC(uint8_t* buf, int len)
 {
-	unsigned short crc = 0;
+	uint16_t crc = 0;
 	
 	/* 进行CRC校验 */
-	if((buf[0]==0x00)&&(len >= 133))
+	crc = crc16(buf+3, len - 5, crc);
+	if(crc != (buf[131]<<8|buf[132]))	//buf[131]为CRCH，buf[132]为CRCL
 	{
-		crc = crc16(buf+3, 128, crc);
-		if(crc != (buf[131]<<8|buf[132]))
-		{
-			return 0;// 没通过校验
-		}
-		
-		/* 通过校验 */
-        return 1;
+		printf("crc error\r\n");
+		return 0;   /* 没通过校验 */
+	}else{
+		printf("crc ok\r\n");
+    	return 1;	/* 通过校验 */
 	}
-    return 1;
 }
 
 static enum UPDATE_STATE update_state = TO_START;
@@ -152,54 +162,54 @@ uint8_t temp_len = 0;
  */
 void YModem_Update(void)
 {
-	int i;
 	if(Get_state()==TO_START)
 	{
-		send_command(CCC);
+		Send_Command(CCC);
 		HAL_Delay(1000);
 	}
 	if(Rx_Flag)    	// Receive flag
 	{
-		Rx_Flag=0;	// clean flag
+		Rx_Flag = 0;	// clean flag
 				
 		/* 拷贝 */
 		temp_len = Rx_Len;
-		for(i = 0; i < temp_len; i++)
-		{
-			temp_buf[i] = Rx_Buf[i];
-		}
+        memcpy(temp_buf,Rx_Buf,temp_len);
 		
 		switch(temp_buf[0])
 		{
 			case SOH://数据包开始
 			{
 				static uint8_t data_state = 0;
-				if(Check_CRC(temp_buf, temp_len)==1)// 通过CRC16校验
-				{					
-					if((Get_state()==TO_START)&&(temp_buf[1] == 0x00)&&(temp_buf[2] == (uint8_t)(~temp_buf[1])))// 开始
+
+				/* CRC16校验 */
+				if(Check_CRC(temp_buf, temp_len))	
+				{
+					/* 起始帧 */			
+					if((Get_state()==TO_START)&&(temp_buf[1] == 0x00)&&(temp_buf[2] == (uint8_t)(~temp_buf[1])))
 					{
 						printf("> Receive start...\r\n");
 
 						Set_state(TO_RECEIVE_DATA);
 						data_state = 0x01;						
-						send_command(ACK);
-						send_command(CCC);
+						Send_Command(ACK);
+						Send_Command(CCC);
 
 						/* 擦除App2 */							
-						//Flash_Erase_page(Application_2_Addr, 40);
 						Flash_Erase_page(Application_2_Addr,Application_Size/PAGESIZE);
 						printf("> Erase APP2 %d page\r\n",Application_Size/PAGESIZE);
 					}
-					else if((Get_state()==TO_RECEIVE_END)&&(temp_buf[1] == 0x00)&&(temp_buf[2] == (uint8_t)(~temp_buf[1])))// 结束
+					/* 结束帧 */
+					else if((Get_state()==TO_RECEIVE_END)&&(temp_buf[1] == 0x00)&&(temp_buf[2] == (uint8_t)(~temp_buf[1])))
 					{
 						printf("> Receive end...\r\n");
 
-						Set_Update_Done();						
-						Set_state(TO_START);
-						send_command(ACK);
-						HAL_NVIC_SystemReset();
-					}					
-					else if((Get_state()==TO_RECEIVE_DATA)&&(temp_buf[1] == data_state)&&(temp_buf[2] == (uint8_t)(~temp_buf[1])))// 接收数据
+						Set_Update_Done();		//标记升级完成					
+						Set_state(TO_START);	//标记可以继续接收Ymodem数据	
+						Send_Command(ACK);			
+						HAL_NVIC_SystemReset();	//重启系统
+					}
+					/* 数据帧，对STX和SOH并没有区分 */					
+					else if((Get_state()==TO_RECEIVE_DATA)&&(temp_buf[1] == data_state)&&(temp_buf[2] == (uint8_t)(~temp_buf[1])))
 					{
 						printf("> Receive data bag:%d byte\r\n",data_state * 128);
 						
@@ -207,7 +217,7 @@ void YModem_Update(void)
 						Flash_write((Application_2_Addr + (data_state-1) * 128), (uint32_t *)(&temp_buf[3]), 32);
 						data_state++;
 						
-						send_command(ACK);		
+						Send_Command(ACK);		
 					}
 				}
 				else
@@ -216,22 +226,24 @@ void YModem_Update(void)
 				}
 				
 			}break;
-			case EOT://数据包开始
+
+			/* 结束传输 */
+			case EOT:
 			{
 				if(Get_state()==TO_RECEIVE_DATA)
 				{
 					printf("> Receive EOT1...\r\n");
 					
 					Set_state(TO_RECEIVE_EOT2);					
-					send_command(NACK);
+					Send_Command(NACK);
 				}
 				else if(Get_state()==TO_RECEIVE_EOT2)
 				{
 					printf("> Receive EOT2...\r\n");
 					
 					Set_state(TO_RECEIVE_END);					
-					send_command(ACK);
-					send_command(CCC);
+					Send_Command(ACK);
+					Send_Command(CCC);
 				}
 				else
 				{

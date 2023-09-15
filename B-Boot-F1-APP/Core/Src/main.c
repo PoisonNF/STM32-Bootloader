@@ -59,18 +59,6 @@ void SystemClock_Config(void);
 uint8_t Rx_Flag = 0;
 uint16_t Rx_Len = 0;
 uint8_t Rx_Buf[Rx_Max] = {0};
-
-/**
- * @brief 串口重定向（需要开启Use MicroLIB）
- * @param ch  		发送的数据
- * @param f         文件流
- * @return ch
- */
-int fputc(int ch, FILE *f)
-{
-	HAL_UART_Transmit(&huart1, (uint8_t *)&ch, 1, 0xFFFF);
-	return ch;
-}
 /* USER CODE END 0 */
 
 /**
