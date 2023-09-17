@@ -78,15 +78,15 @@ static inline void Flash_read(uint32_t addr, uint32_t *buf,uint32_t word_size)
 }
 
 /**
- * @brief 判断启动模式，读取APP2的最后一页
+ * @brief 判断启动模式，读取APP2的最后一个Word
  * @param NULL
  * @return mode 用于选择启动模式
  */
-uint32_t Read_Start_Mode(void)
+static uint32_t Read_Start_Mode(void)
 {
 	uint32_t mode = 0;
 
-	/* 从APP2的最后一页读取一个word */
+	/* 读取APP2的最后一个Word */
 	Flash_read((Application_2_Addr + Application_Size - 4),&mode,1);
 
 	return mode;

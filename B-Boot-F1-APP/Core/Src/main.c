@@ -102,7 +102,7 @@ int main(void)
 	printf("\r\n");
 	printf("***********************************\r\n");
 	printf("*                                 *\r\n");
-	printf("*      B-Boot's Application       *\r\n");
+	printf("*      B-Boot-F1's Application    *\r\n");
 	printf("*          For the test           *\r\n");
 	printf("*         Version :  0.1          *\r\n");
 	printf("*                                 *\r\n");

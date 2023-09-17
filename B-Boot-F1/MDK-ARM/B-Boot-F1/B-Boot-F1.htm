@@ -3,7 +3,7 @@
 <title>Static Call Graph - [B-Boot-F1\B-Boot-F1.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image B-Boot-F1\B-Boot-F1.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Thu Sep 14 14:57:46 2023
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Sat Sep 16 13:04:38 2023
 <BR><P>
 <H3>Maximum Stack Usage =        136 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -403,8 +403,8 @@ Global Symbols
 <P><STRONG><a name="[56]"></a>FLASH_WaitForLastOperation</STRONG> (Thumb, 80 bytes, Stack size 16 bytes, stm32f1xx_hal_flash.o(i.FLASH_WaitForLastOperation))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = FLASH_WaitForLastOperation
 </UL>
-<BR>[Calls]<UL><LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FLASH_SetErrorCode
-<LI><a href="#[57]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GetTick
+<BR>[Calls]<UL><LI><a href="#[57]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GetTick
+<LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FLASH_SetErrorCode
 </UL>
 <BR>[Called By]<UL><LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_FLASH_Program
 <LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_FLASHEx_Erase
@@ -448,9 +448,9 @@ Global Symbols
 <P><STRONG><a name="[62]"></a>HAL_FLASH_Program</STRONG> (Thumb, 122 bytes, Stack size 40 bytes, stm32f1xx_hal_flash.o(i.HAL_FLASH_Program))
 <BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = HAL_FLASH_Program &rArr; FLASH_WaitForLastOperation
 </UL>
-<BR>[Calls]<UL><LI><a href="#[63]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FLASH_Program_HalfWord
-<LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_llsr
+<BR>[Calls]<UL><LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_llsr
 <LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FLASH_WaitForLastOperation
+<LI><a href="#[63]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FLASH_Program_HalfWord
 </UL>
 <BR>[Called By]<UL><LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MoveCode
 </UL>
@@ -695,23 +695,15 @@ Global Symbols
 <P><STRONG><a name="[8]"></a>PendSV_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, stm32f1xx_it.o(i.PendSV_Handler))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f103xe.o(RESET)
 </UL>
-<P><STRONG><a name="[86]"></a>Read_Start_Mode</STRONG> (Thumb, 20 bytes, Stack size 8 bytes, bootloader.o(i.Read_Start_Mode))
-<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = Read_Start_Mode
-</UL>
-<BR>[Calls]<UL><LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Flash_read
-</UL>
-<BR>[Called By]<UL><LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Start_BootLoader
-</UL>
-
 <P><STRONG><a name="[6]"></a>SVC_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, stm32f1xx_it.o(i.SVC_Handler))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f103xe.o(RESET)
 </UL>
 <P><STRONG><a name="[87]"></a>Start_BootLoader</STRONG> (Thumb, 170 bytes, Stack size 16 bytes, bootloader.o(i.Start_BootLoader))
 <BR><BR>[Stack]<UL><LI>Max Depth = 136<LI>Call Chain = Start_BootLoader &rArr; MoveCode &rArr; Flash_Erase_page &rArr; HAL_FLASHEx_Erase &rArr; FLASH_WaitForLastOperation
 </UL>
-<BR>[Calls]<UL><LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Read_Start_Mode
-<LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MoveCode
+<BR>[Calls]<UL><LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MoveCode
 <LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IAP_ExecuteApp
+<LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Read_Start_Mode
 <LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
 <BR>[Called By]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
@@ -817,8 +809,16 @@ Local Symbols
 <P><STRONG><a name="[5d]"></a>Flash_read</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, bootloader.o(i.Flash_read))
 <BR><BR>[Calls]<UL><LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy4
 </UL>
-<BR>[Called By]<UL><LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Read_Start_Mode
-<LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MoveCode
+<BR>[Called By]<UL><LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MoveCode
+<LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Read_Start_Mode
+</UL>
+
+<P><STRONG><a name="[86]"></a>Read_Start_Mode</STRONG> (Thumb, 20 bytes, Stack size 8 bytes, bootloader.o(i.Read_Start_Mode))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = Read_Start_Mode
+</UL>
+<BR>[Calls]<UL><LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Flash_read
+</UL>
+<BR>[Called By]<UL><LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Start_BootLoader
 </UL>
 
 <P><STRONG><a name="[49]"></a>UART_DMAAbortOnError</STRONG> (Thumb, 16 bytes, Stack size 8 bytes, stm32f1xx_hal_uart.o(i.UART_DMAAbortOnError))

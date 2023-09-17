@@ -21,7 +21,7 @@ int fputc(int ch, FILE *f)
  * @param command  指令内容	
  * @return NULL
  */
-void Send_Command(uint8_t command)
+static void Send_Command(uint8_t command)
 {
 	HAL_UART_Transmit(&huart2, (uint8_t *)&command,1, 0xFFFF);
 	HAL_Delay(10);
@@ -76,14 +76,14 @@ static void Flash_write(uint32_t addr,uint32_t *buf,uint32_t word_size)
 }
 
 /**
- * @brief 标记升级完成
+ * @brief 标记App2区代码存放完成
  * @param NULL
  * @return NULL
  */
-void Set_Update_Done(void)
+static void Code_Storage_Done(void)
 {
 	uint32_t update_flag = Startup_Update;				// 对应bootloader的启动步骤
-	Flash_write((Application_2_Addr + Application_Size - 4), &update_flag,1 );
+	Flash_write((Application_2_Addr + Application_Size - 4), &update_flag,1 );   //在APP2中添加标记
 }
 
 /* 临时存储的buff */
@@ -97,7 +97,7 @@ uint8_t save_buf[128] = {0};
  * @param crc   CRC
  * @return crc  返回CRC的值
  */
-uint16_t crc16(uint8_t *addr, int num, uint16_t crc)  
+static uint16_t crc16(uint8_t *addr, int num, uint16_t crc)  
 {  
     int i;  
     for (; num > 0; num--)					/* Step through bytes in memory */  
@@ -129,10 +129,10 @@ uint8_t Check_CRC(uint8_t* buf, int len)
 	crc = crc16(buf+3, len - 5, crc);
 	if(crc != (buf[131]<<8|buf[132]))	//buf[131]为CRCH，buf[132]为CRCL
 	{
-		printf("crc error\r\n");
+		//printf("crc error\r\n");
 		return 0;   /* 没通过校验 */
 	}else{
-		printf("crc ok\r\n");
+		//printf("crc ok\r\n");
     	return 1;	/* 通过校验 */
 	}
 }
@@ -203,7 +203,7 @@ void YModem_Update(void)
 					{
 						printf("> Receive end...\r\n");
 
-						Set_Update_Done();		//标记升级完成					
+						Code_Storage_Done();    //APP2区代码存放完成					
 						Set_state(TO_START);	//标记可以继续接收Ymodem数据	
 						Send_Command(ACK);			
 						HAL_NVIC_SystemReset();	//重启系统

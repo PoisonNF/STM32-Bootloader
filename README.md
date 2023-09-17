@@ -6,23 +6,31 @@
 
 ## 目录
 
-- F103系列
-- ~~F407系列~~
+- F103系列测试平台
+- F407系列测试平台
 - B-Boot怎么样工作的
     - 分区情况
 - B-Boot怎么去使用
     - 更改分区
     - 烧录程序
     - 使用Xshell进行文件传输
+- F1系列与F4系列的差异
+- 测试所使用的Bin文件
 - 参考资料
 
-## F103系列
+## F103系列测试平台
 
 我所测试的板子为正点原子的精英板(STM32F103ZET6)和IM板(STM32F103VCT6) 。
 
 <font color=red>Tips:</font>使用IM板时，因为JY901S占用了UART2，所以需要使用除UART2之外的带DMA功能串口，比如UART3、UART4，~~当然可以使用一块没有焊接JY901S的板子~~。
 
-调试器可以选择ST-Link或者Jlink都行，还需要将UART1和UART2连接到PC观察输出情况。
+调试器可以选择ST-Link或者Jlink都行，还需要将UART1和UART2连接到PC观察输出情况（Ymodem协议）。
+
+## F407系列测试平台
+
+我所测试的板子为正点原子的探索者板(STM32F407ZGT6)。
+
+调试器可以选择ST-Link或者Jlink都行，还需要将UART1和UART2连接到PC观察输出情况（Ymodem协议）。
 
 ## B-Boot怎么样工作的
 
@@ -34,7 +42,7 @@
 
 ### 分区情况
 
-目前工程中的分区为
+目前F1工程中的分区为
 
 ```c
 #define BootLoader_Size 		0x10000U			// BootLoader的大小 40K
@@ -46,7 +54,23 @@
 
 这些宏在B-Boot-F1的bootloader.h，以及B-Boot-F1-APP的ymodem.h中，两边需要同时更改。根据实际情况来就行。
 
+---
+
+目前F4工程中的分区为
+
+```c
+#define BootLoader_Size 		0x20000U			// BootLoader的大小 128K
+#define Application_Size		0x60000U			// 应用程序的大小 384K
+
+#define Application_1_Addr		0x08020000U			// 应用程序1的首地址
+#define Application_2_Addr		0x08080000U			// 应用程序2的首地址
+```
+
+这些宏在B-Boot-F4的bootloader.h，以及B-Boot-F4-APP的ymodem.h中，两边需要同时更改。根据实际情况来就行。
+
 ## B-Boot怎么去使用
+
+下面主要讲解是F1的使用，F4也是类似的。
 
 ### 更改分区
 
@@ -56,7 +80,7 @@
 
 **对于Bootloader而言**，需要指定Start为0x8000000，Size为BootLoader_Size。DEBUG中的烧录配置也要进行更改，擦除方式选择Erase Sectors。
 
-    ![image-20230914155510060](./README.assets/image-20230914155510060.png)
+![image-20230914155510060](./README.assets/image-20230914155510060.png)
 
 ![image-20230914155431329](./README.assets/image-20230914155431329.png)
 
@@ -78,7 +102,23 @@
 
 在Xshell界面中右键传输，选择YModem协议传输，将.bin文件发送到板子上完成更新。
 
+注意Ymodem的分组大小应该为128bytes（Ymodem），不要选择1024bytes（Ymodem-1K）。
+
 如果一直卡在程序升级的地方，需要将整个flash重新擦除再烧写一次。
+
+## F1系列与F4系列的差异
+
+F1与F4的代码主要区别在于flash的擦除，F1对页进行操作，F4对扇区进行操作。
+
+F4以扇区Sector为单位，所以使用flash擦除函数的时候要格外小心，防止擦除其他分区。
+
+在程序中最需要注意的是在使用Flash_Erase_page()函数时，第二个参数需要减1，没有这个减1可能会擦除下一个分区。例如：Flash_Erase_page(des_addr, des_addr + Application_Size - 1);
+
+## 测试所使用的Bin文件
+
+在目录下有一个TestBin的文件夹，里面存放了测试所使用的Bin文件。
+
+例如STM32F1-0x10000.bin，代表STM32F1系列，bootloader大小为0x10000。
 
 ## 参考教程
 
