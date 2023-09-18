@@ -18,22 +18,22 @@ Section Cross References
     startup_stm32f103xe.o(RESET) refers to stm32f1xx_it.o(i.USART1_IRQHandler) for USART1_IRQHandler
     startup_stm32f103xe.o(.text) refers to system_stm32f1xx.o(i.SystemInit) for SystemInit
     startup_stm32f103xe.o(.text) refers to entry.o(.ARM.Collect$$$$00000000) for __main
-    bootloader.o(i.Flash_Erase_page) refers to stm32f1xx_hal_flash.o(i.HAL_FLASH_Unlock) for HAL_FLASH_Unlock
-    bootloader.o(i.Flash_Erase_page) refers to stm32f1xx_hal_flash_ex.o(i.HAL_FLASHEx_Erase) for HAL_FLASHEx_Erase
-    bootloader.o(i.Flash_Erase_page) refers to stm32f1xx_hal_flash.o(i.HAL_FLASH_Lock) for HAL_FLASH_Lock
-    bootloader.o(i.Flash_read) refers to memcpya.o(.text) for __aeabi_memcpy4
+    bootloader.o(i.Flash_Erase_Page) refers to stm32f1xx_hal_flash.o(i.HAL_FLASH_Unlock) for HAL_FLASH_Unlock
+    bootloader.o(i.Flash_Erase_Page) refers to stm32f1xx_hal_flash_ex.o(i.HAL_FLASHEx_Erase) for HAL_FLASHEx_Erase
+    bootloader.o(i.Flash_Erase_Page) refers to stm32f1xx_hal_flash.o(i.HAL_FLASH_Lock) for HAL_FLASH_Lock
+    bootloader.o(i.Flash_Read) refers to memcpya.o(.text) for __aeabi_memcpy4
     bootloader.o(i.IAP_ExecuteApp) refers to bootloader.o(.emb_text) for MSR_MSP
     bootloader.o(i.IAP_ExecuteApp) refers to stm32f1xx_hal_rcc.o(i.HAL_RCC_DeInit) for HAL_RCC_DeInit
     bootloader.o(i.MoveCode) refers to printf5.o(i.__0printf$5) for __2printf
-    bootloader.o(i.MoveCode) refers to bootloader.o(i.Flash_Erase_page) for Flash_Erase_page
+    bootloader.o(i.MoveCode) refers to bootloader.o(i.Flash_Erase_Page) for Flash_Erase_Page
     bootloader.o(i.MoveCode) refers to calloc.o(.text) for calloc
-    bootloader.o(i.MoveCode) refers to bootloader.o(i.Flash_read) for Flash_read
+    bootloader.o(i.MoveCode) refers to bootloader.o(i.Flash_Read) for Flash_Read
     bootloader.o(i.MoveCode) refers to stm32f1xx_hal_flash.o(i.HAL_FLASH_Unlock) for HAL_FLASH_Unlock
     bootloader.o(i.MoveCode) refers to stm32f1xx_hal_flash.o(i.HAL_FLASH_Program) for HAL_FLASH_Program
     bootloader.o(i.MoveCode) refers to stm32f1xx_hal_flash.o(i.HAL_FLASH_Lock) for HAL_FLASH_Lock
     bootloader.o(i.MoveCode) refers to memseta.o(.text) for __aeabi_memclr4
     bootloader.o(i.MoveCode) refers to malloc.o(i.free) for free
-    bootloader.o(i.Read_Start_Mode) refers to bootloader.o(i.Flash_read) for Flash_read
+    bootloader.o(i.Read_Start_Mode) refers to bootloader.o(i.Flash_Read) for Flash_Read
     bootloader.o(i.Start_BootLoader) refers to printf5.o(i.__0printf$5) for __2printf
     bootloader.o(i.Start_BootLoader) refers to bootloader.o(i.Read_Start_Mode) for Read_Start_Mode
     bootloader.o(i.Start_BootLoader) refers to bootloader.o(i.MoveCode) for MoveCode
@@ -892,10 +892,10 @@ Image Symbol Table
     i.FLASH_SetErrorCode                     0x08000308   Section        0  stm32f1xx_hal_flash.o(i.FLASH_SetErrorCode)
     FLASH_SetErrorCode                       0x08000309   Thumb Code    84  stm32f1xx_hal_flash.o(i.FLASH_SetErrorCode)
     i.FLASH_WaitForLastOperation             0x08000364   Section        0  stm32f1xx_hal_flash.o(i.FLASH_WaitForLastOperation)
-    i.Flash_Erase_page                       0x080003b8   Section        0  bootloader.o(i.Flash_Erase_page)
-    Flash_Erase_page                         0x080003b9   Thumb Code    40  bootloader.o(i.Flash_Erase_page)
-    i.Flash_read                             0x080003e0   Section        0  bootloader.o(i.Flash_read)
-    Flash_read                               0x080003e1   Thumb Code    12  bootloader.o(i.Flash_read)
+    i.Flash_Erase_Page                       0x080003b8   Section        0  bootloader.o(i.Flash_Erase_Page)
+    Flash_Erase_Page                         0x080003b9   Thumb Code    40  bootloader.o(i.Flash_Erase_Page)
+    i.Flash_Read                             0x080003e0   Section        0  bootloader.o(i.Flash_Read)
+    Flash_Read                               0x080003e1   Thumb Code    12  bootloader.o(i.Flash_Read)
     i.HAL_DMA_Abort                          0x080003ec   Section        0  stm32f1xx_hal_dma.o(i.HAL_DMA_Abort)
     i.HAL_DMA_Abort_IT                       0x08000434   Section        0  stm32f1xx_hal_dma.o(i.HAL_DMA_Abort_IT)
     i.HAL_Delay                              0x08000564   Section        0  stm32f1xx_hal.o(i.HAL_Delay)
@@ -1246,8 +1246,8 @@ Memory Map of the image
     0x080002ec   0x080002ec   0x0000001c   Code   RO         1621    i.FLASH_Program_HalfWord  stm32f1xx_hal_flash.o
     0x08000308   0x08000308   0x0000005c   Code   RO         1622    i.FLASH_SetErrorCode  stm32f1xx_hal_flash.o
     0x08000364   0x08000364   0x00000054   Code   RO         1623    i.FLASH_WaitForLastOperation  stm32f1xx_hal_flash.o
-    0x080003b8   0x080003b8   0x00000028   Code   RO           14    i.Flash_Erase_page  bootloader.o
-    0x080003e0   0x080003e0   0x0000000c   Code   RO           15    i.Flash_read        bootloader.o
+    0x080003b8   0x080003b8   0x00000028   Code   RO           14    i.Flash_Erase_Page  bootloader.o
+    0x080003e0   0x080003e0   0x0000000c   Code   RO           15    i.Flash_Read        bootloader.o
     0x080003ec   0x080003ec   0x00000046   Code   RO         1285    i.HAL_DMA_Abort     stm32f1xx_hal_dma.o
     0x08000432   0x08000432   0x00000002   PAD
     0x08000434   0x08000434   0x00000130   Code   RO         1286    i.HAL_DMA_Abort_IT  stm32f1xx_hal_dma.o

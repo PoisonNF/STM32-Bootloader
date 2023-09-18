@@ -39,6 +39,8 @@ extern uint8_t Rx_Flag;
 extern uint16_t Rx_Len;
 extern uint8_t Rx_Buf[Rx_Max];
 
+#define POLY        0x1021  
+
 void YModem_Update(void);
 
 #endif /* __YMODEM_H */

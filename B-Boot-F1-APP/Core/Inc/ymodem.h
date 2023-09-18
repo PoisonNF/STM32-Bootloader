@@ -32,6 +32,8 @@ enum UPDATE_STATE
 #define Startup_Update 0xAAAAAAAA	// 升级再启动
 #define Startup_Reset  0x5555AAAA	// ***恢复出厂 目前没使用***
 
+#define POLY        0x1021  
+
 void YModem_Update(void);
 
 #endif /* __YMODEM_H */

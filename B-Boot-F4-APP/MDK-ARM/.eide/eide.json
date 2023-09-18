@@ -67,6 +67,15 @@
         "files": [],
         "folders": [
           {
+            "name": "CMSIS",
+            "files": [
+              {
+                "path": "../Core/Src/system_stm32f4xx.c"
+              }
+            ],
+            "folders": []
+          },
+          {
             "name": "STM32F4xx_HAL_Driver",
             "files": [
               {
@@ -116,15 +125,6 @@
               },
               {
                 "path": "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c"
-              }
-            ],
-            "folders": []
-          },
-          {
-            "name": "CMSIS",
-            "files": [
-              {
-                "path": "../Core/Src/system_stm32f4xx.c"
               }
             ],
             "folders": []

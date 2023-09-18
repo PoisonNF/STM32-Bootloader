@@ -98,13 +98,13 @@
 
 ### 使用Xshell进行文件传输
 
-串口1进行调试信息的打印, 串口2进行YModem升级。
+串口1进行调试信息的打印，串口2进行YModem升级。
 
 在Xshell界面中右键传输，选择YModem协议传输，将.bin文件发送到板子上完成更新。
 
 注意Ymodem的分组大小应该为128bytes（Ymodem），不要选择1024bytes（Ymodem-1K）。
 
-如果一直卡在程序升级的地方，需要将整个flash重新擦除再烧写一次。
+如果一直卡在程序升级的地方，需要将整个flash重新擦除，再烧写一次Bootloader和App。
 
 ## F1系列与F4系列的差异
 
@@ -112,7 +112,15 @@ F1与F4的代码主要区别在于flash的擦除，F1对页进行操作，F4对�
 
 F4以扇区Sector为单位，所以使用flash擦除函数的时候要格外小心，防止擦除其他分区。
 
-在程序中最需要注意的是在使用Flash_Erase_page()函数时，第二个参数需要减1，没有这个减1可能会擦除下一个分区。例如：Flash_Erase_page(des_addr, des_addr + Application_Size - 1);
+在程序中最需要注意的是在使用Flash_Erase_Sector()函数时，第二个参数需要减1，没有这个减1可能会擦除下一个分区。例如：Flash_Erase_Sector(des_addr, des_addr + Application_Size - 1);
+
+![07b49a4d2c2c4855b0734d07c5bfc52e](./README.assets/07b49a4d2c2c4855b0734d07c5bfc52e.jpg)
+
+<center><p>F1系列Flash128K分布图</p></center>
+
+![format,png](./README.assets/format,png.png)
+
+<center><p>F4系列Flash分布图</p></center>
 
 ## 测试所使用的Bin文件
 

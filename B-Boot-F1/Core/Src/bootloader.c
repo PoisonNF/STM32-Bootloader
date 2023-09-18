@@ -23,7 +23,7 @@ int fputc(int ch, FILE *f)
  * @param num       擦除的页数
  * @return 0 成功 -1 失败
  */
-static int Flash_Erase_page(uint32_t pageaddr, uint32_t num)
+static int Flash_Erase_Page(uint32_t pageaddr, uint32_t num)
 {
 	/* 解锁flash */
 	HAL_FLASH_Unlock();
@@ -50,7 +50,7 @@ static int Flash_Erase_page(uint32_t pageaddr, uint32_t num)
  * @param word_size  长度
  * @return NULL
  */
-static void Flash_write(uint32_t addr,uint32_t *buf,uint32_t word_size)
+static void Flash_Write(uint32_t addr,uint32_t *buf,uint32_t word_size)
 {
 	/* 解锁flash */
 	HAL_FLASH_Unlock();
@@ -72,7 +72,7 @@ static void Flash_write(uint32_t addr,uint32_t *buf,uint32_t word_size)
  * @param word_size  长度
  * @return 
  */
-static inline void Flash_read(uint32_t addr, uint32_t *buf,uint32_t word_size)
+static inline void Flash_Read(uint32_t addr, uint32_t *buf,uint32_t word_size)
 {
 	memcpy(buf, (uint32_t*) addr, word_size * sizeof(uint32_t));
 }
@@ -87,7 +87,7 @@ static uint32_t Read_Start_Mode(void)
 	uint32_t mode = 0;
 
 	/* 读取APP2的最后一个Word */
-	Flash_read((Application_2_Addr + Application_Size - 4),&mode,1);
+	Flash_Read((Application_2_Addr + Application_Size - 4),&mode,1);
 
 	return mode;
 }
@@ -103,7 +103,7 @@ void MoveCode(uint32_t src_addr, uint32_t des_addr, uint32_t byte_size)
 {
 	/* 擦除目的地址 */
 	printf("> Start erase des flash......\r\n");
-	Flash_Erase_page(des_addr, (byte_size/PageSize));
+	Flash_Erase_Page(des_addr, (byte_size/PageSize));
 	printf("> Erase des flash down......\r\n");
 	
 	/* 开始拷贝 */	
@@ -113,8 +113,8 @@ void MoveCode(uint32_t src_addr, uint32_t des_addr, uint32_t byte_size)
 	printf("> Start copy......\r\n");
 	for(int i = 0; i < byte_size/1024; i++)
 	{
-		Flash_read((src_addr + i*1024), temp, 256);
-		Flash_write((des_addr + i*1024), temp, 256);
+		Flash_Read((src_addr + i*1024), temp, 256);
+		Flash_Write((des_addr + i*1024), temp, 256);
         memset(temp,0,256);
         printf("Copy %dKB now\r\n",i+1);
 	}
@@ -123,7 +123,7 @@ void MoveCode(uint32_t src_addr, uint32_t des_addr, uint32_t byte_size)
 	
 	/* 擦除源地址 */
 	printf("> Start erase src flash......\r\n");
-	Flash_Erase_page(src_addr, (byte_size/PageSize));
+	Flash_Erase_Page(src_addr, (byte_size/PageSize));
 	printf("> Erase src flash down......\r\n");
 
 }

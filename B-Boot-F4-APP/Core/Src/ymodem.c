@@ -36,7 +36,7 @@ static void Send_Command(uint8_t command)
  * @param address  起始地址	
  * @return sector
  */
-static uint32_t GetSector(uint32_t address)
+static uint32_t Get_Sector(uint32_t address)
 {
     uint32_t sector = 0;
 
@@ -62,7 +62,7 @@ static uint32_t GetSector(uint32_t address)
  * @param end_addr    结束地址
  * @return 0 成功 -1 失败
  */
-static int Flash_Erase_page(uint32_t start_addr, uint32_t end_addr)
+static int Flash_Erase_Sector(uint32_t start_addr, uint32_t end_addr)
 {
 	uint32_t UserStartSector;
 	uint32_t SectorError = 0;
@@ -72,11 +72,11 @@ static int Flash_Erase_page(uint32_t start_addr, uint32_t end_addr)
 	HAL_FLASH_Unlock();
 	
 	/* 获取起始地址的扇区，擦除FLASH*/
-	UserStartSector = GetSector(start_addr);
+	UserStartSector = Get_Sector(start_addr);
 
 	FlashSet.TypeErase = TYPEERASE_SECTORS;
 	FlashSet.Sector = UserStartSector;
-	FlashSet.NbSectors = GetSector(end_addr) - UserStartSector;
+	FlashSet.NbSectors = Get_Sector(end_addr) - UserStartSector;
 	FlashSet.VoltageRange = VOLTAGE_RANGE_3;
     
 	/*调用擦除函数*/
@@ -94,7 +94,7 @@ static int Flash_Erase_page(uint32_t start_addr, uint32_t end_addr)
  * @param word_size  长度
  * @return NULL
  */
-static void Flash_write(uint32_t addr,uint32_t *buf,uint32_t word_size)
+static void Flash_Write(uint32_t addr,uint32_t *buf,uint32_t word_size)
 {
 	/* 解锁flash */
 	HAL_FLASH_Unlock();
@@ -117,13 +117,9 @@ static void Flash_write(uint32_t addr,uint32_t *buf,uint32_t word_size)
 void Code_Storage_Done(void)
 {
 	uint32_t update_flag = Startup_Update;				// 对应bootloader的启动步骤
-	Flash_write((Application_2_Addr + Application_Size - 4), &update_flag,1 );   //在Bootloader中添加标记
+	Flash_Write((Application_2_Addr + Application_Size - 4), &update_flag,1 );   //在Bootloader中添加标记
 }
 
-/* 临时存储的buff */
-uint8_t save_buf[128] = {0};
-
-#define POLY        0x1021  
 /**
  * @brief CRC-16 校验
  * @param addr 开始地址
@@ -131,7 +127,7 @@ uint8_t save_buf[128] = {0};
  * @param crc   CRC
  * @return crc  返回CRC的值
  */
-static uint16_t crc16(uint8_t *addr, int num, uint16_t crc)  
+static uint16_t CRC16(uint8_t *addr, int num, uint16_t crc)  
 {  
     int i;  
     for (; num > 0; num--)					/* Step through bytes in memory */  
@@ -160,7 +156,7 @@ uint8_t Check_CRC(uint8_t* buf, int len)
 	uint16_t crc = 0;
 	
 	/* 进行CRC校验 */
-	crc = crc16(buf+3, len - 5, crc);
+	crc = CRC16(buf+3, len - 5, crc);
 	if(crc != (buf[131]<<8|buf[132]))	//buf[131]为CRCH，buf[132]为CRCL
 	{
 		//printf("crc error\r\n");
@@ -171,24 +167,21 @@ uint8_t Check_CRC(uint8_t* buf, int len)
 	}
 }
 
-static enum UPDATE_STATE update_state = TO_START;
+static enum UPDATE_STATE Update_State = TO_START;
 /* 设置升级的步骤 */
-static inline void Set_state(enum UPDATE_STATE state)
+static inline void Set_State(enum UPDATE_STATE state)
 {
-	update_state = state;
+	Update_State = state;
 }
-
 
 /* 查询升级的步骤 */
-static inline uint8_t Get_state(void)
+static inline uint8_t Get_State(void)
 {
-	return update_state;
+	return Update_State;
 }
 
-
-
-uint8_t temp_buf[512] = {0};
-uint8_t temp_len = 0;
+uint8_t Temp_Buf[512] = {0};
+uint8_t Temp_Len = 0;
 /**
  * @brief 通过YModem协议升级
  * @param NULL
@@ -196,7 +189,7 @@ uint8_t temp_len = 0;
  */
 void YModem_Update(void)
 {
-	if(Get_state()==TO_START)
+	if(Get_State()==TO_START)
 	{
 		Send_Command(CCC);
 		HAL_Delay(1000);
@@ -206,50 +199,50 @@ void YModem_Update(void)
 		Rx_Flag = 0;	// clean flag
 				
 		/* 拷贝 */
-		temp_len = Rx_Len;
-        memcpy(temp_buf,Rx_Buf,temp_len);
+		Temp_Len = Rx_Len;
+        memcpy(Temp_Buf,Rx_Buf,Temp_Len);
 		
-		switch(temp_buf[0])
+		switch(Temp_Buf[0])
 		{
 			case SOH://数据包开始
 			{
-				static uint8_t data_state = 0;
+				static uint8_t Data_State = 0;
 
 				/* CRC16校验 */
-				if(Check_CRC(temp_buf, temp_len))	
+				if(Check_CRC(Temp_Buf, Temp_Len))	
 				{
 					/* 起始帧 */			
-					if((Get_state()==TO_START)&&(temp_buf[1] == 0x00)&&(temp_buf[2] == (uint8_t)(~temp_buf[1])))
+					if((Get_State()==TO_START)&&(Temp_Buf[1] == 0x00)&&(Temp_Buf[2] == (uint8_t)(~Temp_Buf[1])))
 					{
 						printf("> Receive start...\r\n");
 
-						Set_state(TO_RECEIVE_DATA);
-						data_state = 0x01;						
+						Set_State(TO_RECEIVE_DATA);
+						Data_State = 0x01;						
 						Send_Command(ACK);
 						Send_Command(CCC);
 
 						/* 擦除App2 */							
-						Flash_Erase_page(Application_2_Addr,Application_2_Addr + Application_Size - 1);
-						printf("> Erase APP2 %d page\r\n",GetSector(Application_2_Addr + Application_Size - 1)-GetSector(Application_2_Addr) + 1);
+						Flash_Erase_Sector(Application_2_Addr,Application_2_Addr + Application_Size - 1);
+						printf("> Erase APP2 %d page\r\n",Get_Sector(Application_2_Addr + Application_Size - 1)-Get_Sector(Application_2_Addr) + 1);
 					}
 					/* 结束帧 */
-					else if((Get_state()==TO_RECEIVE_END)&&(temp_buf[1] == 0x00)&&(temp_buf[2] == (uint8_t)(~temp_buf[1])))
+					else if((Get_State()==TO_RECEIVE_END)&&(Temp_Buf[1] == 0x00)&&(Temp_Buf[2] == (uint8_t)(~Temp_Buf[1])))
 					{
 						printf("> Receive end...\r\n");
 
 						Code_Storage_Done();	//APP2区代码存放完成				
-						Set_state(TO_START);	//标记可以继续接收Ymodem数据	
+						Set_State(TO_START);	//标记可以继续接收Ymodem数据	
 						Send_Command(ACK);			
 						HAL_NVIC_SystemReset();	//重启系统
 					}
 					/* 数据帧，对STX和SOH并没有区分 */					
-					else if((Get_state()==TO_RECEIVE_DATA)&&(temp_buf[1] == data_state)&&(temp_buf[2] == (uint8_t)(~temp_buf[1])))
+					else if((Get_State()==TO_RECEIVE_DATA)&&(Temp_Buf[1] == Data_State)&&(Temp_Buf[2] == (uint8_t)(~Temp_Buf[1])))
 					{
-						printf("> Receive data bag:%d byte\r\n",data_state * 128);
+						printf("> Receive data bag:%d byte\r\n",Data_State * 128);
 						
 						/* 烧录程序 */
-						Flash_write((Application_2_Addr + (data_state-1) * 128), (uint32_t *)(&temp_buf[3]), 32);
-						data_state++;
+						Flash_Write((Application_2_Addr + (Data_State-1) * 128), (uint32_t *)(&Temp_Buf[3]), 32);
+						Data_State++;
 						
 						Send_Command(ACK);		
 					}
@@ -264,18 +257,18 @@ void YModem_Update(void)
 			/* 结束传输 */
 			case EOT:
 			{
-				if(Get_state()==TO_RECEIVE_DATA)
+				if(Get_State()==TO_RECEIVE_DATA)
 				{
 					printf("> Receive EOT1...\r\n");
 					
-					Set_state(TO_RECEIVE_EOT2);					
+					Set_State(TO_RECEIVE_EOT2);					
 					Send_Command(NACK);
 				}
-				else if(Get_state()==TO_RECEIVE_EOT2)
+				else if(Get_State()==TO_RECEIVE_EOT2)
 				{
 					printf("> Receive EOT2...\r\n");
 					
-					Set_state(TO_RECEIVE_END);					
+					Set_State(TO_RECEIVE_END);					
 					Send_Command(ACK);
 					Send_Command(CCC);
 				}

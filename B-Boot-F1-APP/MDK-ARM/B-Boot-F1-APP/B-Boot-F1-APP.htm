@@ -3,7 +3,7 @@
 <title>Static Call Graph - [B-Boot-F1-APP\B-Boot-F1-APP.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image B-Boot-F1-APP\B-Boot-F1-APP.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Sun Sep 17 10:17:45 2023
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Sun Sep 17 21:51:11 2023
 <BR><P>
 <H3>Maximum Stack Usage =        136 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -456,7 +456,7 @@ Global Symbols
 
 <P><STRONG><a name="[5b]"></a>HAL_FLASH_Lock</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, stm32f1xx_hal_flash.o(i.HAL_FLASH_Lock))
 <BR><BR>[Called By]<UL><LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;YModem_Update
-<LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Flash_write
+<LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Flash_Write
 </UL>
 
 <P><STRONG><a name="[5a]"></a>HAL_FLASH_Program</STRONG> (Thumb, 120 bytes, Stack size 40 bytes, stm32f1xx_hal_flash.o(i.HAL_FLASH_Program))
@@ -466,12 +466,12 @@ Global Symbols
 <LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FLASH_WaitForLastOperation
 <LI><a href="#[63]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FLASH_Program_HalfWord
 </UL>
-<BR>[Called By]<UL><LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Flash_write
+<BR>[Called By]<UL><LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Flash_Write
 </UL>
 
 <P><STRONG><a name="[59]"></a>HAL_FLASH_Unlock</STRONG> (Thumb, 28 bytes, Stack size 0 bytes, stm32f1xx_hal_flash.o(i.HAL_FLASH_Unlock))
 <BR><BR>[Called By]<UL><LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;YModem_Update
-<LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Flash_write
+<LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Flash_Write
 </UL>
 
 <P><STRONG><a name="[7b]"></a>HAL_GPIO_Init</STRONG> (Thumb, 462 bytes, Stack size 40 bytes, stm32f1xx_hal_gpio.o(i.HAL_GPIO_Init))
@@ -782,7 +782,7 @@ Global Symbols
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f103xe.o(RESET)
 </UL>
 <P><STRONG><a name="[8e]"></a>YModem_Update</STRONG> (Thumb, 358 bytes, Stack size 40 bytes, ymodem.o(i.YModem_Update))
-<BR><BR>[Stack]<UL><LI>Max Depth = 120<LI>Call Chain = YModem_Update &rArr; Flash_write &rArr; HAL_FLASH_Program &rArr; FLASH_WaitForLastOperation
+<BR><BR>[Stack]<UL><LI>Max Depth = 120<LI>Call Chain = YModem_Update &rArr; Flash_Write &rArr; HAL_FLASH_Program &rArr; FLASH_WaitForLastOperation
 </UL>
 <BR>[Calls]<UL><LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_NVIC_SystemReset
 <LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_FLASH_Unlock
@@ -791,7 +791,7 @@ Global Symbols
 <LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Delay
 <LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Check_CRC
 <LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Send_Command
-<LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Flash_write
+<LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Flash_Write
 <LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 <LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
 </UL>
@@ -842,8 +842,8 @@ Global Symbols
 <H3>
 Local Symbols
 </H3>
-<P><STRONG><a name="[58]"></a>Flash_write</STRONG> (Thumb, 50 bytes, Stack size 24 bytes, ymodem.o(i.Flash_write))
-<BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = Flash_write &rArr; HAL_FLASH_Program &rArr; FLASH_WaitForLastOperation
+<P><STRONG><a name="[58]"></a>Flash_Write</STRONG> (Thumb, 50 bytes, Stack size 24 bytes, ymodem.o(i.Flash_Write))
+<BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = Flash_Write &rArr; HAL_FLASH_Program &rArr; FLASH_WaitForLastOperation
 </UL>
 <BR>[Calls]<UL><LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_FLASH_Unlock
 <LI><a href="#[5a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_FLASH_Program

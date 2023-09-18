@@ -22,7 +22,7 @@ int fputc(int ch, FILE *f)
  * @param address  起始地址	
  * @return sector
  */
-static uint32_t GetSector(uint32_t address)
+static uint32_t Get_Sector(uint32_t address)
 {
     uint32_t sector = 0;
 
@@ -48,7 +48,7 @@ static uint32_t GetSector(uint32_t address)
  * @param end_addr    结束地址
  * @return 0 成功 -1 失败
  */
-static int Flash_Erase_page(uint32_t start_addr, uint32_t end_addr)
+static int Flash_Erase_Sector(uint32_t start_addr, uint32_t end_addr)
 {
 	uint32_t UserStartSector;
 	uint32_t SectorError = 0;
@@ -58,11 +58,11 @@ static int Flash_Erase_page(uint32_t start_addr, uint32_t end_addr)
 	HAL_FLASH_Unlock();
 	
 	/* 获取起始地址的扇区，擦除FLASH*/
-	UserStartSector = GetSector(start_addr);
+	UserStartSector = Get_Sector(start_addr);
 
 	FlashSet.TypeErase = TYPEERASE_SECTORS;
 	FlashSet.Sector = UserStartSector;
-	FlashSet.NbSectors = GetSector(end_addr) - UserStartSector + 1;
+	FlashSet.NbSectors = Get_Sector(end_addr) - UserStartSector + 1;
 	FlashSet.VoltageRange = VOLTAGE_RANGE_3;
 	
 	/*调用擦除函数*/
@@ -80,7 +80,7 @@ static int Flash_Erase_page(uint32_t start_addr, uint32_t end_addr)
  * @param word_size  长度
  * @return NULL
  */
-static void Flash_write(uint32_t addr,uint32_t *buf,uint32_t word_size)
+static void Flash_Write(uint32_t addr,uint32_t *buf,uint32_t word_size)
 {
 	/* 解锁flash */
 	HAL_FLASH_Unlock();
@@ -102,7 +102,7 @@ static void Flash_write(uint32_t addr,uint32_t *buf,uint32_t word_size)
  * @param word_size  长度
  * @return 
  */
-static inline void Flash_read(uint32_t addr, uint32_t *buf,uint32_t word_size)
+static inline void Flash_Read(uint32_t addr, uint32_t *buf,uint32_t word_size)
 {
 	memcpy(buf, (uint32_t*) addr, word_size * sizeof(uint32_t));
 }
@@ -117,7 +117,7 @@ uint32_t Read_Start_Mode(void)
 	uint32_t mode = 0;
 
 	/* 读取APP2的最后一个Word */
-	Flash_read((Application_2_Addr + Application_Size - 4),&mode,1);
+	Flash_Read((Application_2_Addr + Application_Size - 4),&mode,1);
 
 	return mode;
 }
@@ -133,7 +133,7 @@ void MoveCode(uint32_t src_addr, uint32_t des_addr, uint32_t byte_size)
 {
 	/* 擦除目的地址 */
 	printf("> Start erase des flash......\r\n");
-	Flash_Erase_page(des_addr, des_addr + Application_Size - 1);
+	Flash_Erase_Sector(des_addr, des_addr + Application_Size - 1);
 	printf("> Erase des flash down......\r\n");
 	
 	/* 开始拷贝 */	
@@ -143,8 +143,8 @@ void MoveCode(uint32_t src_addr, uint32_t des_addr, uint32_t byte_size)
 	printf("> Start copy......\r\n");
 	for(int i = 0; i < byte_size/1024; i++)
 	{
-		Flash_read((src_addr + i*1024), temp, 256);
-		Flash_write((des_addr + i*1024), temp, 256);
+		Flash_Read((src_addr + i*1024), temp, 256);
+		Flash_Write((des_addr + i*1024), temp, 256);
         memset(temp,0,256);
         printf("Copy %dKB now\r\n",i+1);
 	}
@@ -153,7 +153,7 @@ void MoveCode(uint32_t src_addr, uint32_t des_addr, uint32_t byte_size)
 	
 	/* 擦除源地址 */
 	printf("> Start erase src flash......\r\n");
-	Flash_Erase_page(src_addr, src_addr + Application_Size - 1);
+	Flash_Erase_Sector(src_addr, src_addr + Application_Size - 1);
 	printf("> Erase src flash down......\r\n");
 
 }

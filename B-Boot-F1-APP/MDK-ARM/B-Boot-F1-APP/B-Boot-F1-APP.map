@@ -20,9 +20,9 @@ Section Cross References
     startup_stm32f103xe.o(RESET) refers to stm32f1xx_it.o(i.USART2_IRQHandler) for USART2_IRQHandler
     startup_stm32f103xe.o(.text) refers to system_stm32f1xx.o(i.SystemInit) for SystemInit
     startup_stm32f103xe.o(.text) refers to entry.o(.ARM.Collect$$$$00000000) for __main
-    ymodem.o(i.Flash_write) refers to stm32f1xx_hal_flash.o(i.HAL_FLASH_Unlock) for HAL_FLASH_Unlock
-    ymodem.o(i.Flash_write) refers to stm32f1xx_hal_flash.o(i.HAL_FLASH_Program) for HAL_FLASH_Program
-    ymodem.o(i.Flash_write) refers to stm32f1xx_hal_flash.o(i.HAL_FLASH_Lock) for HAL_FLASH_Lock
+    ymodem.o(i.Flash_Write) refers to stm32f1xx_hal_flash.o(i.HAL_FLASH_Unlock) for HAL_FLASH_Unlock
+    ymodem.o(i.Flash_Write) refers to stm32f1xx_hal_flash.o(i.HAL_FLASH_Program) for HAL_FLASH_Program
+    ymodem.o(i.Flash_Write) refers to stm32f1xx_hal_flash.o(i.HAL_FLASH_Lock) for HAL_FLASH_Lock
     ymodem.o(i.Send_Command) refers to stm32f1xx_hal_uart.o(i.HAL_UART_Transmit) for HAL_UART_Transmit
     ymodem.o(i.Send_Command) refers to stm32f1xx_hal.o(i.HAL_Delay) for HAL_Delay
     ymodem.o(i.Send_Command) refers to usart.o(.bss) for huart2
@@ -31,7 +31,7 @@ Section Cross References
     ymodem.o(i.YModem_Update) refers to memcpya.o(.text) for __aeabi_memcpy
     ymodem.o(i.YModem_Update) refers to printf1.o(i.__0printf$1) for __2printf
     ymodem.o(i.YModem_Update) refers to ymodem.o(i.Check_CRC) for Check_CRC
-    ymodem.o(i.YModem_Update) refers to ymodem.o(i.Flash_write) for Flash_write
+    ymodem.o(i.YModem_Update) refers to ymodem.o(i.Flash_Write) for Flash_Write
     ymodem.o(i.YModem_Update) refers to stm32f1xx_hal_flash.o(i.HAL_FLASH_Unlock) for HAL_FLASH_Unlock
     ymodem.o(i.YModem_Update) refers to stm32f1xx_hal_flash_ex.o(i.HAL_FLASHEx_Erase) for HAL_FLASHEx_Erase
     ymodem.o(i.YModem_Update) refers to stm32f1xx_hal_flash.o(i.HAL_FLASH_Lock) for HAL_FLASH_Lock
@@ -874,8 +874,8 @@ Image Symbol Table
     i.FLASH_SetErrorCode                     0x08010310   Section        0  stm32f1xx_hal_flash.o(i.FLASH_SetErrorCode)
     FLASH_SetErrorCode                       0x08010311   Thumb Code    84  stm32f1xx_hal_flash.o(i.FLASH_SetErrorCode)
     i.FLASH_WaitForLastOperation             0x0801036c   Section        0  stm32f1xx_hal_flash.o(i.FLASH_WaitForLastOperation)
-    i.Flash_write                            0x080103c0   Section        0  ymodem.o(i.Flash_write)
-    Flash_write                              0x080103c1   Thumb Code    50  ymodem.o(i.Flash_write)
+    i.Flash_Write                            0x080103c0   Section        0  ymodem.o(i.Flash_Write)
+    Flash_Write                              0x080103c1   Thumb Code    50  ymodem.o(i.Flash_Write)
     i.HAL_DMA_Abort                          0x080103f2   Section        0  stm32f1xx_hal_dma.o(i.HAL_DMA_Abort)
     i.HAL_DMA_Abort_IT                       0x08010438   Section        0  stm32f1xx_hal_dma.o(i.HAL_DMA_Abort_IT)
     i.HAL_DMA_IRQHandler                     0x08010568   Section        0  stm32f1xx_hal_dma.o(i.HAL_DMA_IRQHandler)
@@ -1248,7 +1248,7 @@ Memory Map of the image
     0x080102f4   0x080102f4   0x0000001c   Code   RO         1664    i.FLASH_Program_HalfWord  stm32f1xx_hal_flash.o
     0x08010310   0x08010310   0x0000005c   Code   RO         1665    i.FLASH_SetErrorCode  stm32f1xx_hal_flash.o
     0x0801036c   0x0801036c   0x00000054   Code   RO         1666    i.FLASH_WaitForLastOperation  stm32f1xx_hal_flash.o
-    0x080103c0   0x080103c0   0x00000032   Code   RO           14    i.Flash_write       ymodem.o
+    0x080103c0   0x080103c0   0x00000032   Code   RO           14    i.Flash_Write       ymodem.o
     0x080103f2   0x080103f2   0x00000046   Code   RO         1328    i.HAL_DMA_Abort     stm32f1xx_hal_dma.o
     0x08010438   0x08010438   0x00000130   Code   RO         1329    i.HAL_DMA_Abort_IT  stm32f1xx_hal_dma.o
     0x08010568   0x08010568   0x00000248   Code   RO         1333    i.HAL_DMA_IRQHandler  stm32f1xx_hal_dma.o

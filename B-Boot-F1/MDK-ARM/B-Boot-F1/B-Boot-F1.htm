@@ -3,7 +3,7 @@
 <title>Static Call Graph - [B-Boot-F1\B-Boot-F1.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image B-Boot-F1\B-Boot-F1.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Sat Sep 16 13:04:38 2023
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Sun Sep 17 21:43:18 2023
 <BR><P>
 <H3>Maximum Stack Usage =        136 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -324,7 +324,7 @@ Global Symbols
 <P><STRONG><a name="[97]"></a>__aeabi_memcpy</STRONG> (Thumb, 36 bytes, Stack size 0 bytes, memcpya.o(.text), UNUSED)
 
 <P><STRONG><a name="[5e]"></a>__aeabi_memcpy4</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, memcpya.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Flash_read
+<BR><BR>[Called By]<UL><LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Flash_Read
 </UL>
 
 <P><STRONG><a name="[98]"></a>__aeabi_memcpy8</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, memcpya.o(.text), UNUSED)
@@ -437,12 +437,12 @@ Global Symbols
 <LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FLASH_PageErase
 <LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FLASH_WaitForLastOperation
 </UL>
-<BR>[Called By]<UL><LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Flash_Erase_page
+<BR>[Called By]<UL><LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Flash_Erase_Page
 </UL>
 
 <P><STRONG><a name="[5c]"></a>HAL_FLASH_Lock</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, stm32f1xx_hal_flash.o(i.HAL_FLASH_Lock))
 <BR><BR>[Called By]<UL><LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MoveCode
-<LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Flash_Erase_page
+<LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Flash_Erase_Page
 </UL>
 
 <P><STRONG><a name="[62]"></a>HAL_FLASH_Program</STRONG> (Thumb, 122 bytes, Stack size 40 bytes, stm32f1xx_hal_flash.o(i.HAL_FLASH_Program))
@@ -457,7 +457,7 @@ Global Symbols
 
 <P><STRONG><a name="[5a]"></a>HAL_FLASH_Unlock</STRONG> (Thumb, 28 bytes, Stack size 0 bytes, stm32f1xx_hal_flash.o(i.HAL_FLASH_Unlock))
 <BR><BR>[Called By]<UL><LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MoveCode
-<LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Flash_Erase_page
+<LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Flash_Erase_Page
 </UL>
 
 <P><STRONG><a name="[7a]"></a>HAL_GPIO_Init</STRONG> (Thumb, 454 bytes, Stack size 40 bytes, stm32f1xx_hal_gpio.o(i.HAL_GPIO_Init))
@@ -670,13 +670,13 @@ Global Symbols
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f103xe.o(RESET)
 </UL>
 <P><STRONG><a name="[82]"></a>MoveCode</STRONG> (Thumb, 168 bytes, Stack size 40 bytes, bootloader.o(i.MoveCode))
-<BR><BR>[Stack]<UL><LI>Max Depth = 120<LI>Call Chain = MoveCode &rArr; Flash_Erase_page &rArr; HAL_FLASHEx_Erase &rArr; FLASH_WaitForLastOperation
+<BR><BR>[Stack]<UL><LI>Max Depth = 120<LI>Call Chain = MoveCode &rArr; Flash_Erase_Page &rArr; HAL_FLASHEx_Erase &rArr; FLASH_WaitForLastOperation
 </UL>
 <BR>[Calls]<UL><LI><a href="#[5a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_FLASH_Unlock
 <LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_FLASH_Program
 <LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_FLASH_Lock
-<LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Flash_read
-<LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Flash_Erase_page
+<LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Flash_Read
+<LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Flash_Erase_Page
 <LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 <LI><a href="#[84]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
 <LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;calloc
@@ -699,7 +699,7 @@ Global Symbols
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f103xe.o(RESET)
 </UL>
 <P><STRONG><a name="[87]"></a>Start_BootLoader</STRONG> (Thumb, 170 bytes, Stack size 16 bytes, bootloader.o(i.Start_BootLoader))
-<BR><BR>[Stack]<UL><LI>Max Depth = 136<LI>Call Chain = Start_BootLoader &rArr; MoveCode &rArr; Flash_Erase_page &rArr; HAL_FLASHEx_Erase &rArr; FLASH_WaitForLastOperation
+<BR><BR>[Stack]<UL><LI>Max Depth = 136<LI>Call Chain = Start_BootLoader &rArr; MoveCode &rArr; Flash_Erase_Page &rArr; HAL_FLASHEx_Erase &rArr; FLASH_WaitForLastOperation
 </UL>
 <BR>[Calls]<UL><LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MoveCode
 <LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IAP_ExecuteApp
@@ -796,8 +796,8 @@ Global Symbols
 <H3>
 Local Symbols
 </H3>
-<P><STRONG><a name="[59]"></a>Flash_Erase_page</STRONG> (Thumb, 40 bytes, Stack size 32 bytes, bootloader.o(i.Flash_Erase_page))
-<BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = Flash_Erase_page &rArr; HAL_FLASHEx_Erase &rArr; FLASH_WaitForLastOperation
+<P><STRONG><a name="[59]"></a>Flash_Erase_Page</STRONG> (Thumb, 40 bytes, Stack size 32 bytes, bootloader.o(i.Flash_Erase_Page))
+<BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = Flash_Erase_Page &rArr; HAL_FLASHEx_Erase &rArr; FLASH_WaitForLastOperation
 </UL>
 <BR>[Calls]<UL><LI><a href="#[5a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_FLASH_Unlock
 <LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_FLASH_Lock
@@ -806,7 +806,7 @@ Local Symbols
 <BR>[Called By]<UL><LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MoveCode
 </UL>
 
-<P><STRONG><a name="[5d]"></a>Flash_read</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, bootloader.o(i.Flash_read))
+<P><STRONG><a name="[5d]"></a>Flash_Read</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, bootloader.o(i.Flash_Read))
 <BR><BR>[Calls]<UL><LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy4
 </UL>
 <BR>[Called By]<UL><LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MoveCode
@@ -816,7 +816,7 @@ Local Symbols
 <P><STRONG><a name="[86]"></a>Read_Start_Mode</STRONG> (Thumb, 20 bytes, Stack size 8 bytes, bootloader.o(i.Read_Start_Mode))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = Read_Start_Mode
 </UL>
-<BR>[Calls]<UL><LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Flash_read
+<BR>[Calls]<UL><LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Flash_Read
 </UL>
 <BR>[Called By]<UL><LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Start_BootLoader
 </UL>
