@@ -258,8 +258,6 @@ void USART2_IRQHandler(void)
 	}
   /* USER CODE END USART2_IRQn 0 */
   HAL_UART_IRQHandler(&huart2);
-  /* USER CODE END USART2_IRQn 0 */
-  HAL_UART_IRQHandler(&huart2);
   /* USER CODE BEGIN USART2_IRQn 1 */
 
   /* USER CODE END USART2_IRQn 1 */

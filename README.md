@@ -45,11 +45,11 @@
 目前F1工程中的分区为
 
 ```c
-#define BootLoader_Size 		0x10000U			// BootLoader的大小 40K
-#define Application_Size		0xA000U		        // 应用程序的大小 40K
+#define BootLoader_Size 		0x9000U		    	// BootLoader的大小 36K
+#define Application_Size		0x1B000U	    	// 应用程序的大小 108K
 
-#define Application_1_Addr		0x08010000U			// 应用程序1的首地址
-#define Application_2_Addr		0x0801A000U			// 应用程序2的首地址
+#define Application_1_Addr		0x08009000U			// 应用程序1的首地址
+#define Application_2_Addr		0x08024000U			// 应用程序2的首地址
 ```
 
 这些宏在B-Boot-F1的bootloader.h，以及B-Boot-F1-APP的ymodem.h中，两边需要同时更改。根据实际情况来就行。
@@ -126,7 +126,7 @@ F4以扇区Sector为单位，所以使用flash擦除函数的时候要格外小�
 
 在目录下有一个TestBin的文件夹，里面存放了测试所使用的Bin文件。
 
-例如STM32F1-0x10000.bin，代表STM32F1系列，bootloader大小为0x10000。
+例如STM32F1-0x9000.bin，代表STM32F1系列，bootloader大小为0x9000。
 
 ## 参考教程
 
