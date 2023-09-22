@@ -27,3 +27,5 @@ b-boot-f1-app\stm32f1xx_it.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_
 b-boot-f1-app\stm32f1xx_it.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h
 b-boot-f1-app\stm32f1xx_it.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h
 b-boot-f1-app\stm32f1xx_it.o: ../Core/Inc/stm32f1xx_it.h
+b-boot-f1-app\stm32f1xx_it.o: ..\OTA\inc\dtu-4g.h
+b-boot-f1-app\stm32f1xx_it.o: ../Core/Inc/usart.h

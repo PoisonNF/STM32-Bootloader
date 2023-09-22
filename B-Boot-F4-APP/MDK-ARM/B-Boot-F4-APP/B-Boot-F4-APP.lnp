@@ -6,7 +6,6 @@
 "b-boot-f4-app\usart.o"
 "b-boot-f4-app\stm32f4xx_it.o"
 "b-boot-f4-app\stm32f4xx_hal_msp.o"
-"b-boot-f4-app\ymodem.o"
 "b-boot-f4-app\stm32f4xx_hal_tim.o"
 "b-boot-f4-app\stm32f4xx_hal_tim_ex.o"
 "b-boot-f4-app\stm32f4xx_hal_uart.o"
@@ -24,6 +23,9 @@
 "b-boot-f4-app\stm32f4xx_hal.o"
 "b-boot-f4-app\stm32f4xx_hal_exti.o"
 "b-boot-f4-app\system_stm32f4xx.o"
+"b-boot-f4-app\dtu-4g.o"
+"b-boot-f4-app\mqtt.o"
+"b-boot-f4-app\ymodem.o"
 --library_type=microlib --strict --scatter "B-Boot-F4-APP\B-Boot-F4-APP.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

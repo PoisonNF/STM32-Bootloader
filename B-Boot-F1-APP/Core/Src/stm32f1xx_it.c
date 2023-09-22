@@ -22,6 +22,8 @@
 #include "stm32f1xx_it.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "dtu-4g.h"
+#include "usart.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -55,9 +57,10 @@
 /* USER CODE END 0 */
 
 /* External variables --------------------------------------------------------*/
-extern DMA_HandleTypeDef hdma_usart2_rx;
+extern DMA_HandleTypeDef hdma_usart3_rx;
+extern DMA_HandleTypeDef hdma_usart3_tx;
 extern UART_HandleTypeDef huart1;
-extern UART_HandleTypeDef huart2;
+extern UART_HandleTypeDef huart3;
 /* USER CODE BEGIN EV */
 
 /* USER CODE END EV */
@@ -201,17 +204,31 @@ void SysTick_Handler(void)
 /******************************************************************************/
 
 /**
-  * @brief This function handles DMA1 channel6 global interrupt.
+  * @brief This function handles DMA1 channel2 global interrupt.
   */
-void DMA1_Channel6_IRQHandler(void)
+void DMA1_Channel2_IRQHandler(void)
 {
-  /* USER CODE BEGIN DMA1_Channel6_IRQn 0 */
+  /* USER CODE BEGIN DMA1_Channel2_IRQn 0 */
 
-  /* USER CODE END DMA1_Channel6_IRQn 0 */
-  HAL_DMA_IRQHandler(&hdma_usart2_rx);
-  /* USER CODE BEGIN DMA1_Channel6_IRQn 1 */
+  /* USER CODE END DMA1_Channel2_IRQn 0 */
+  HAL_DMA_IRQHandler(&hdma_usart3_tx);
+  /* USER CODE BEGIN DMA1_Channel2_IRQn 1 */
 
-  /* USER CODE END DMA1_Channel6_IRQn 1 */
+  /* USER CODE END DMA1_Channel2_IRQn 1 */
+}
+
+/**
+  * @brief This function handles DMA1 channel3 global interrupt.
+  */
+void DMA1_Channel3_IRQHandler(void)
+{
+  /* USER CODE BEGIN DMA1_Channel3_IRQn 0 */
+
+  /* USER CODE END DMA1_Channel3_IRQn 0 */
+  HAL_DMA_IRQHandler(&hdma_usart3_rx);
+  /* USER CODE BEGIN DMA1_Channel3_IRQn 1 */
+
+  /* USER CODE END DMA1_Channel3_IRQn 1 */
 }
 
 /**
@@ -229,35 +246,33 @@ void USART1_IRQHandler(void)
 }
 
 /**
-  * @brief This function handles USART2 global interrupt.
+  * @brief This function handles USART3 global interrupt.
   */
-void USART2_IRQHandler(void)
+void USART3_IRQHandler(void)
 {
-  /* USER CODE BEGIN USART2_IRQn 0 */
-	uint32_t temp;
-	if((__HAL_UART_GET_FLAG(&huart2,UART_FLAG_IDLE) != RESET))  
+  /* USER CODE BEGIN USART3_IRQn 0 */
+	if((__HAL_UART_GET_FLAG(&DTU_USART,UART_FLAG_IDLE) != RESET))  
 	{   
-		/*清除状态寄存器和串口数据寄存器*/
-		__HAL_UART_CLEAR_IDLEFLAG(&huart2); 
+		/* 清除中断标记 */
+		__HAL_UART_CLEAR_IDLEFLAG(&DTU_USART); 
 
-		/*失能DMA接收*/
-		HAL_UART_DMAStop(&huart2);  
+		/* 停止DMA接收 */
+		HAL_UART_DMAStop(&DTU_USART);  
 
-		/*读取接收长度，总大小-剩余大小*/
-		temp = huart2.hdmarx->Instance->CNDTR; 
-		Rx_Len = Rx_Max - temp; 
+		/* 总数据量减去未接收到的数据量为已经接收到的数据量 */
+        usart_info.usDMARxLength = usart_info.usDMARxMAXSize - __HAL_DMA_GET_COUNTER(&hdma_usart3_rx);
 
-		/*接收标志位置1*/
-		Rx_Flag=1;  
+		/* 接收标志位置1 */
+		usart_info.ucDMARxCplt = 1;
 
-		/*使能接收DMA接收*/
-		HAL_UART_Receive_DMA(&huart2,Rx_Buf,Rx_Max);  
+		/* 重新启动DMA接收 */
+		HAL_UART_Receive_DMA(&DTU_USART,usart_info.ucpDMARxCache,usart_info.usDMARxMAXSize);  
 	}
-  /* USER CODE END USART2_IRQn 0 */
-  HAL_UART_IRQHandler(&huart2);
-  /* USER CODE BEGIN USART2_IRQn 1 */
+  /* USER CODE END USART3_IRQn 0 */
+  HAL_UART_IRQHandler(&DTU_USART);
+  /* USER CODE BEGIN USART3_IRQn 1 */
 
-  /* USER CODE END USART2_IRQn 1 */
+  /* USER CODE END USART3_IRQn 1 */
 }
 
 /* USER CODE BEGIN 1 */

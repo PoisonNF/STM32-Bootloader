@@ -4,10 +4,6 @@
 #include "usart.h"
 #include "string.h"
 
-uint8_t Rx_Flag;
-uint16_t Rx_Len;
-uint8_t Rx_Buf[Rx_Max];
-
 /**
  * @brief 串口重定向（需要开启Use MicroLIB）
  * @param ch  		发送的数据
@@ -27,7 +23,7 @@ int fputc(int ch, FILE *f)
  */
 static void Send_Command(uint8_t command)
 {
-	HAL_UART_Transmit(&huart2, (uint8_t *)&command,1, 0xFFFF);
+	HAL_UART_Transmit(&huart3, (uint8_t *)&command,1, 0xFFFF);
 	HAL_Delay(10);
 }
 
@@ -94,7 +90,7 @@ static int Flash_Erase_Sector(uint32_t start_addr, uint32_t end_addr)
  * @param word_size  长度
  * @return NULL
  */
-static void Flash_Write(uint32_t addr,uint32_t *buf,uint32_t word_size)
+void Flash_Write(uint32_t addr,uint32_t *buf,uint32_t word_size)
 {
 	/* 解锁flash */
 	HAL_FLASH_Unlock();
@@ -120,6 +116,8 @@ void Code_Storage_Done(void)
 	Flash_Write((Application_2_Addr + Application_Size - 4), &update_flag,1 );   //在Bootloader中添加标记
 }
 
+
+#define POLY        0x1021  
 /**
  * @brief CRC-16 校验
  * @param addr 开始地址
@@ -194,13 +192,13 @@ void YModem_Update(void)
 		Send_Command(CCC);
 		HAL_Delay(1000);
 	}
-	if(Rx_Flag)    	// Receive flag
+	if(usart_info.ucDMARxCplt)    	// Receive flag
 	{
-		Rx_Flag = 0;	// clean flag
+		usart_info.ucDMARxCplt = 0;	// clean flag
 				
 		/* 拷贝 */
-		Temp_Len = Rx_Len;
-        memcpy(Temp_Buf,Rx_Buf,Temp_Len);
+		Temp_Len = usart_info.usDMARxLength;
+        memcpy(Temp_Buf,usart_info.ucpDMARxCache,Temp_Len);
 		
 		switch(Temp_Buf[0])
 		{

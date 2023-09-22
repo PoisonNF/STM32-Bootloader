@@ -51,9 +51,6 @@
                   },
                   {
                     "path": "../Core/Src/usart.c"
-                  },
-                  {
-                    "path": "../Core/Src/ymodem.c"
                   }
                 ],
                 "folders": []
@@ -66,6 +63,15 @@
         "name": "Drivers",
         "files": [],
         "folders": [
+          {
+            "name": "CMSIS",
+            "files": [
+              {
+                "path": "../Core/Src/system_stm32f1xx.c"
+              }
+            ],
+            "folders": []
+          },
           {
             "name": "STM32F1xx_HAL_Driver",
             "files": [
@@ -113,17 +119,23 @@
               }
             ],
             "folders": []
-          },
-          {
-            "name": "CMSIS",
-            "files": [
-              {
-                "path": "../Core/Src/system_stm32f1xx.c"
-              }
-            ],
-            "folders": []
           }
         ]
+      },
+      {
+        "name": "OTA",
+        "files": [
+          {
+            "path": "../OTA/src/dtu-4g.c"
+          },
+          {
+            "path": "../OTA/src/mqtt.c"
+          },
+          {
+            "path": "../OTA/src/ymodem.c"
+          }
+        ],
+        "folders": []
       }
     ]
   },
@@ -230,8 +242,8 @@
               "tag": "IROM",
               "id": 1,
               "mem": {
-                "startAddr": "0x8010000",
-                "size": "0xa000"
+                "startAddr": "0x8009000",
+                "size": "0x1b000"
               },
               "isChecked": true,
               "isStartup": true
@@ -271,9 +283,8 @@
           "../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy",
           "../Drivers/CMSIS/Device/ST/STM32F1xx/Include",
           "../Drivers/CMSIS/Include",
-          ".cmsis/include",
-          "RTE/_B-Boot-F1-APP",
-          ".eide/deps"
+          "../OTA/inc",
+          "RTE/_B-Boot-F1-APP"
         ],
         "libList": [],
         "sourceDirList": [],

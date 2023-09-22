@@ -30,3 +30,8 @@ b-boot-f4-app\usart.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_r
 b-boot-f4-app\usart.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h
 b-boot-f4-app\usart.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h
 b-boot-f4-app\usart.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
+b-boot-f4-app\usart.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdarg.h
+b-boot-f4-app\usart.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+b-boot-f4-app\usart.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+b-boot-f4-app\usart.o: ..\OTA\inc\dtu-4g.h
+b-boot-f4-app\usart.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h

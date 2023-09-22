@@ -3,14 +3,16 @@
         {
             "name": "B-Boot-F1-APP",
             "includePath": [
-                "e:\\Desktop\\STM32-Bootloader\\B-Boot-F1-APP\\Core\\Inc",
-                "e:\\Desktop\\STM32-Bootloader\\B-Boot-F1-APP\\Drivers\\STM32F1xx_HAL_Driver\\Inc",
-                "e:\\Desktop\\STM32-Bootloader\\B-Boot-F1-APP\\Drivers\\STM32F1xx_HAL_Driver\\Inc\\Legacy",
-                "e:\\Desktop\\STM32-Bootloader\\B-Boot-F1-APP\\Drivers\\CMSIS\\Device\\ST\\STM32F1xx\\Include",
-                "e:\\Desktop\\STM32-Bootloader\\B-Boot-F1-APP\\Drivers\\CMSIS\\Include",
-                "e:\\Desktop\\STM32-Bootloader\\B-Boot-F1-APP\\MDK-ARM",
-                "e:\\Desktop\\STM32-Bootloader\\B-Boot-F1-APP\\Core\\Src",
-                "e:\\Desktop\\STM32-Bootloader\\B-Boot-F1-APP\\Drivers\\STM32F1xx_HAL_Driver\\Src"
+                "e:\\Desktop\\STM32F1-OTA\\APP-OTA\\Core\\Inc",
+                "e:\\Desktop\\STM32F1-OTA\\APP-OTA\\Drivers\\STM32F1xx_HAL_Driver\\Inc",
+                "e:\\Desktop\\STM32F1-OTA\\APP-OTA\\Drivers\\STM32F1xx_HAL_Driver\\Inc\\Legacy",
+                "e:\\Desktop\\STM32F1-OTA\\APP-OTA\\Drivers\\CMSIS\\Device\\ST\\STM32F1xx\\Include",
+                "e:\\Desktop\\STM32F1-OTA\\APP-OTA\\Drivers\\CMSIS\\Include",
+                "e:\\Desktop\\STM32F1-OTA\\APP-OTA\\OTA\\inc",
+                "e:\\Desktop\\STM32F1-OTA\\APP-OTA\\MDK-ARM",
+                "e:\\Desktop\\STM32F1-OTA\\APP-OTA\\Core\\Src",
+                "e:\\Desktop\\STM32F1-OTA\\APP-OTA\\Drivers\\STM32F1xx_HAL_Driver\\Src",
+                "e:\\Desktop\\STM32F1-OTA\\APP-OTA\\OTA\\src"
             ],
             "defines": [
                 "USE_HAL_DRIVER",

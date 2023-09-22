@@ -1,6 +1,5 @@
-b-boot-f1-app\ymodem.o: ..\Core\Src\ymodem.c
-b-boot-f1-app\ymodem.o: ../Core/Inc/ymodem.h
-b-boot-f1-app\ymodem.o: ../Core/Inc/main.h
+b-boot-f1-app\ymodem.o: ..\OTA\src\ymodem.c
+b-boot-f1-app\ymodem.o: ..\OTA\inc\ymodem.h
 b-boot-f1-app\ymodem.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h
 b-boot-f1-app\ymodem.o: ../Core/Inc/stm32f1xx_hal_conf.h
 b-boot-f1-app\ymodem.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h
@@ -27,6 +26,7 @@ b-boot-f1-app\ymodem.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.
 b-boot-f1-app\ymodem.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h
 b-boot-f1-app\ymodem.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h
 b-boot-f1-app\ymodem.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h
+b-boot-f1-app\ymodem.o: ../Core/Inc/main.h
 b-boot-f1-app\ymodem.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 b-boot-f1-app\ymodem.o: ../Core/Inc/usart.h
 b-boot-f1-app\ymodem.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h

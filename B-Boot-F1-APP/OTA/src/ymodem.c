@@ -23,7 +23,7 @@ int fputc(int ch, FILE *f)
  */
 static void Send_Command(uint8_t command)
 {
-	HAL_UART_Transmit(&huart2, (uint8_t *)&command,1, 0xFFFF);
+	HAL_UART_Transmit(&huart3, (uint8_t *)&command,1, 0xFFFF);
 	HAL_Delay(10);
 }
 
@@ -60,7 +60,7 @@ static int Flash_Erase_Page(uint32_t pageaddr, uint32_t num)
  * @param word_size  长度
  * @return NULL
  */
-static void Flash_Write(uint32_t addr,uint32_t *buf,uint32_t word_size)
+void Flash_Write(uint32_t addr,uint32_t *buf,uint32_t word_size)
 {
 	/* 解锁flash */
 	HAL_FLASH_Unlock();
@@ -80,12 +80,14 @@ static void Flash_Write(uint32_t addr,uint32_t *buf,uint32_t word_size)
  * @param NULL
  * @return NULL
  */
-static void Code_Storage_Done(void)
+void Code_Storage_Done(void)
 {
 	uint32_t update_flag = Startup_Update;				// 对应bootloader的启动步骤
-	Flash_Write((Application_2_Addr + Application_Size - 4), &update_flag,1 );   //在APP2中添加标记
+	Flash_Write((Application_2_Addr + Application_Size - 4), &update_flag,1 );   //在Bootloader中添加标记
 }
 
+
+#define POLY        0x1021  
 /**
  * @brief CRC-16 校验
  * @param addr 开始地址
@@ -160,13 +162,13 @@ void YModem_Update(void)
 		Send_Command(CCC);
 		HAL_Delay(1000);
 	}
-	if(Rx_Flag)    	// Receive flag
+	if(usart_info.ucDMARxCplt)    	// Receive flag
 	{
-		Rx_Flag = 0;	// clean flag
+		usart_info.ucDMARxCplt = 0;	// clean flag
 				
 		/* 拷贝 */
-		Temp_Len = Rx_Len;
-        memcpy(Temp_Buf,Rx_Buf,Temp_Len);
+		Temp_Len = usart_info.usDMARxLength;
+        memcpy(Temp_Buf,usart_info.ucpDMARxCache,Temp_Len);
 		
 		switch(Temp_Buf[0])
 		{
@@ -196,7 +198,7 @@ void YModem_Update(void)
 					{
 						printf("> Receive end...\r\n");
 
-						Code_Storage_Done();    //APP2区代码存放完成					
+						Code_Storage_Done();	//APP2区代码存放完成				
 						Set_State(TO_START);	//标记可以继续接收Ymodem数据	
 						Send_Command(ACK);			
 						HAL_NVIC_SystemReset();	//重启系统

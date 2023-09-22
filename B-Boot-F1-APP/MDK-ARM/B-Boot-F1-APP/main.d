@@ -29,5 +29,6 @@ b-boot-f1-app\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h
 b-boot-f1-app\main.o: ../Core/Inc/dma.h
 b-boot-f1-app\main.o: ../Core/Inc/usart.h
 b-boot-f1-app\main.o: ../Core/Inc/gpio.h
-b-boot-f1-app\main.o: ../Core/Inc/ymodem.h
 b-boot-f1-app\main.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+b-boot-f1-app\main.o: ..\OTA\inc\dtu-4g.h
+b-boot-f1-app\main.o: ..\OTA\inc\ymodem.h

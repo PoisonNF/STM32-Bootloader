@@ -1,5 +1,5 @@
-b-boot-f4-app\ymodem.o: ..\Core\Src\ymodem.c
-b-boot-f4-app\ymodem.o: ../Core/Inc/ymodem.h
+b-boot-f4-app\ymodem.o: ..\OTA\src\ymodem.c
+b-boot-f4-app\ymodem.o: ..\OTA\inc\ymodem.h
 b-boot-f4-app\ymodem.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
 b-boot-f4-app\ymodem.o: ../Core/Inc/stm32f4xx_hal_conf.h
 b-boot-f4-app\ymodem.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h
