@@ -537,6 +537,11 @@
               <FileType>1</FileType>
               <FilePath>..\OTA\src\ymodem.c</FilePath>
             </File>
+            <File>
+              <FileName>sort.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\OTA\src\sort.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

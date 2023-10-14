@@ -3,14 +3,16 @@
         {
             "name": "B-Boot-F4",
             "includePath": [
-                "e:\\Desktop\\STM32-Bootloader\\B-Boot-F4\\Core\\Inc",
-                "e:\\Desktop\\STM32-Bootloader\\B-Boot-F4\\Drivers\\STM32F4xx_HAL_Driver\\Inc",
-                "e:\\Desktop\\STM32-Bootloader\\B-Boot-F4\\Drivers\\STM32F4xx_HAL_Driver\\Inc\\Legacy",
-                "e:\\Desktop\\STM32-Bootloader\\B-Boot-F4\\Drivers\\CMSIS\\Device\\ST\\STM32F4xx\\Include",
-                "e:\\Desktop\\STM32-Bootloader\\B-Boot-F4\\Drivers\\CMSIS\\Include",
-                "e:\\Desktop\\STM32-Bootloader\\B-Boot-F4\\MDK-ARM",
-                "e:\\Desktop\\STM32-Bootloader\\B-Boot-F4\\Core\\Src",
-                "e:\\Desktop\\STM32-Bootloader\\B-Boot-F4\\Drivers\\STM32F4xx_HAL_Driver\\Src"
+                "e:\\Desktop\\STM32F4-OTA\\B-Boot-F4\\Core\\Inc",
+                "e:\\Desktop\\STM32F4-OTA\\B-Boot-F4\\Drivers\\STM32F4xx_HAL_Driver\\Inc",
+                "e:\\Desktop\\STM32F4-OTA\\B-Boot-F4\\Drivers\\STM32F4xx_HAL_Driver\\Inc\\Legacy",
+                "e:\\Desktop\\STM32F4-OTA\\B-Boot-F4\\Drivers\\CMSIS\\Device\\ST\\STM32F4xx\\Include",
+                "e:\\Desktop\\STM32F4-OTA\\B-Boot-F4\\Drivers\\CMSIS\\Include",
+                "D:\\Keil_v5\\ARM\\ARMCC\\include",
+                "D:\\Keil_v5\\ARM\\ARMCC\\include\\rw",
+                "e:\\Desktop\\STM32F4-OTA\\B-Boot-F4\\MDK-ARM",
+                "e:\\Desktop\\STM32F4-OTA\\B-Boot-F4\\Core\\Src",
+                "e:\\Desktop\\STM32F4-OTA\\B-Boot-F4\\Drivers\\STM32F4xx_HAL_Driver\\Src"
             ],
             "defines": [
                 "USE_HAL_DRIVER",

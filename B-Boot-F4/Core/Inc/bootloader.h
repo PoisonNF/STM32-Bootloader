@@ -1,7 +1,10 @@
 #ifndef __BOOTLOADER_H_
 #define __BOOTLOADER_H_
 
-#define B_BOOT_VERSION  "0.1"
+/* bootloader版本号 */
+#define B_BOOT_VERSION  "0.2"
+/* 设备序号 */
+#define DEVICE_NO        1      //根据设备名进行更改，定死写在bootloader中
 
 /*=====用户配置(根据自己的分区进行配置)=====*/
 #define BootLoader_Size 		0x20000U		// BootLoader的大小 128K

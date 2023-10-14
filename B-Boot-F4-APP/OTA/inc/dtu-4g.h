@@ -19,6 +19,12 @@ void DTU_Set_Server(void);
 
 void DTU_Usart_Event(uint8_t *data, uint16_t datalen);
 
+void DTU_SendOTAVersion(void);
+
+void DTU_GetOTAInfo(char *data);
+
+void DTU_OTA_Download(int size, int offset);
+
 void DTU_Working(void);
 
 #endif // !__DTU-4G_H_

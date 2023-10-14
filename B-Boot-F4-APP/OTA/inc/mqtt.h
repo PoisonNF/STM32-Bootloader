@@ -4,12 +4,21 @@
 #include "stdint.h"
 
 /* 设备信息用于CONNECT使用 */
+#if 0
+/* MQTTtest信息 */
 #define CLIENTID        "k08lcwgm0Ts.MQTTtest|securemode=2,signmethod=hmacsha256,timestamp=1695198813604|"
 #define USERNAME        "MQTTtest&k08lcwgm0Ts"
 #define PASSWORD        "1f9be4385dde450bd8a4059af5ffccd25e2a6e9a672dd666d7fb2513c593419c"
 #define PRODUCTKEY      "k08lcwgm0Ts"
 #define DEVICENNAME     "MQTTtest"
+#endif
 
+/* D001信息 */
+// #define CLIENTID        "k08lcwgm0Ts.D001|securemode=2,signmethod=hmacsha256,timestamp=1697173381876|"
+// #define USERNAME        "D001&k08lcwgm0Ts"
+// #define PASSWORD        "9df018077e0841352c66b83facc2c9b866f85db233e25d18f9bfc9b9e2d61470"
+// #define PRODUCTKEY      "k08lcwgm0Ts"
+// #define DEVICENNAME     "D001"
 
 /* 控制报头 */
 #define CONNECT         0x10
@@ -63,12 +72,6 @@ void MQTT_DealPublishData(uint8_t *data,uint16_t datalen);
 void MQTT_PublishDataQos0(char *topic,char *data);
 
 void MQTT_PublishDataQos1(char *topic,char *data);
-
-void MQTT_SendOTAVersion(void);
-
-void MQTT_GetOTAInfo(char *data);
-
-void MQTT_OTA_Download(int size,int offset);
 
 #endif // !__MQTT_H_
 

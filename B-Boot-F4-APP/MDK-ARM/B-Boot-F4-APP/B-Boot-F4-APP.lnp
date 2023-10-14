@@ -26,6 +26,7 @@
 "b-boot-f4-app\dtu-4g.o"
 "b-boot-f4-app\mqtt.o"
 "b-boot-f4-app\ymodem.o"
+"b-boot-f4-app\sort.o"
 --library_type=microlib --strict --scatter "B-Boot-F4-APP\B-Boot-F4-APP.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

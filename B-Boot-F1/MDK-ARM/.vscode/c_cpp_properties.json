@@ -8,6 +8,8 @@
                 "e:\\Desktop\\STM32-Bootloader\\B-Boot-F1\\Drivers\\STM32F1xx_HAL_Driver\\Inc\\Legacy",
                 "e:\\Desktop\\STM32-Bootloader\\B-Boot-F1\\Drivers\\CMSIS\\Device\\ST\\STM32F1xx\\Include",
                 "e:\\Desktop\\STM32-Bootloader\\B-Boot-F1\\Drivers\\CMSIS\\Include",
+                "D:\\Keil_v5\\ARM\\ARMCC\\include",
+                "D:\\Keil_v5\\ARM\\ARMCC\\include\\rw",
                 "e:\\Desktop\\STM32-Bootloader\\B-Boot-F1\\MDK-ARM",
                 "e:\\Desktop\\STM32-Bootloader\\B-Boot-F1\\Core\\Src",
                 "e:\\Desktop\\STM32-Bootloader\\B-Boot-F1\\Drivers\\STM32F1xx_HAL_Driver\\Src"
