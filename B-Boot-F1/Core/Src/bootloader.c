@@ -93,6 +93,18 @@ static uint32_t Read_Start_Mode(void)
 }
 
 /**
+ * @brief 标记设备的设备号，放置在APP2结束后一个Word中
+ * @param NULL
+ */
+static void Maker_DeviceNo(void)
+{
+    uint32_t No = DEVICE_NO;
+    
+    Flash_Erase_Page((Application_2_Addr + Application_Size),1); 	//擦除一页
+	Flash_Write((Application_2_Addr + Application_Size), &No,1);   	//在APP2结束后一个Word中添加标记设备序号
+}
+
+/**
  * @brief 进行程序的覆盖
  * @param  src_addr	搬运的源地址
  * @param  des_addr	搬运的目的地址
@@ -183,11 +195,14 @@ void Start_BootLoader(void)
 	printf("\r\n");
 	printf("B-Boot %s %s\r\n",__DATE__,__TIME__);
 	printf("Bootloader Version %s\r\n",B_BOOT_VERSION);
+	printf("Device Name: D%d\r\n",DEVICE_NO);
 	printf("MCU: STM32F103VCT6 Running at 72MHz\r\n");
 	printf("Bootloader Area from %#x - %#x\r\n",FLASH_BASE,Application_1_Addr - 1);
 	printf("Application_1 Area from %#x - %#x\r\n",Application_1_Addr,Application_1_Addr + Application_Size -1);
 	printf("Application_2 Area from %#x - %#x\r\n",Application_2_Addr,Application_2_Addr + Application_Size -1);
     printf("\r\n");
+
+	Maker_DeviceNo();       //标记当前设备的序号，该标记会在应用程序中使用
 
 	printf("=> Choose a startup method......\r\n");	
 	switch(Read_Start_Mode())										// 读取是否启动应用程序 */

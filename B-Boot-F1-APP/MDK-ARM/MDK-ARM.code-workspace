@@ -6,7 +6,11 @@
     ],
     "settings": {
         "files.associations": {
-            "main.h": "c"
+            "main.h": "c",
+            "ymodem.h": "c",
+            "stm32f1xx_hal.h": "c",
+            "usart.h": "c",
+            "mqtt.h": "c"
         }
     },
     "extensions": {}

@@ -76,6 +76,18 @@ void Flash_Write(uint32_t addr,uint32_t *buf,uint32_t word_size)
 }
 
 /**
+ * @brief flash读若干个数据(word)
+ * @param addr       读数据的地址
+ * @param buf        读出数据的数组指针
+ * @param word_size  长度
+ * @return 
+ */
+void Flash_Read(uint32_t addr, uint32_t *buf,uint32_t word_size)
+{
+	memcpy(buf, (uint32_t*) addr, word_size * sizeof(uint32_t));
+}
+
+/**
  * @brief 标记App2区代码存放完成
  * @param NULL
  * @return NULL
@@ -83,7 +95,7 @@ void Flash_Write(uint32_t addr,uint32_t *buf,uint32_t word_size)
 void Code_Storage_Done(void)
 {
 	uint32_t update_flag = Startup_Update;				// 对应bootloader的启动步骤
-	Flash_Write((Application_2_Addr + Application_Size - 4), &update_flag,1 );   //在Bootloader中添加标记
+	Flash_Write((Application_2_Addr + Application_Size - 4), &update_flag,1 );   //在APP2中添加标记
 }
 
 

@@ -138,6 +138,9 @@
             "path": "../OTA/src/mqtt.c"
           },
           {
+            "path": "../OTA/src/sort.c"
+          },
+          {
             "path": "../OTA/src/ymodem.c"
           }
         ],

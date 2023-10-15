@@ -25,6 +25,8 @@ void YModem_Update(void);
 
 void Flash_Write(uint32_t addr,uint32_t *buf,uint32_t word_size);
 
+void Flash_Read(uint32_t addr, uint32_t *buf,uint32_t word_size);
+
 void Code_Storage_Done(void);
 
 #endif /* __YMODEM_H */

@@ -31,8 +31,8 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
-#define USE_YMODEM        //使用串口进行升级
-//#define USE_DTU_4G      //使用DTU4G模块进行升级
+//#define USE_YMODEM        //使用串口进行升级
+#define USE_DTU_4G          //使用DTU4G模块进行升级
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/

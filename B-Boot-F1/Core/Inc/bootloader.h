@@ -1,7 +1,10 @@
 #ifndef __BOOTLOADER_H_
 #define __BOOTLOADER_H_
 
+/* bootloader版本号 */
 #define B_BOOT_VERSION  "0.2"
+/* 设备序号 */
+#define DEVICE_NO        1      //根据设备名进行更改，定死写在bootloader中
 
 #define PageSize		FLASH_PAGE_SIZE			//2K
 

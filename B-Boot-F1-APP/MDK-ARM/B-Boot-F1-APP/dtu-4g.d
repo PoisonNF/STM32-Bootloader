@@ -32,3 +32,4 @@ b-boot-f1-app\dtu-4g.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 b-boot-f1-app\dtu-4g.o: ..\OTA\inc\dtu-4g.h
 b-boot-f1-app\dtu-4g.o: ..\OTA\inc\mqtt.h
 b-boot-f1-app\dtu-4g.o: ..\OTA\inc\ymodem.h
+b-boot-f1-app\dtu-4g.o: ..\OTA\inc\sort.h
